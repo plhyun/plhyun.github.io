@@ -155,3 +155,23 @@ _**가장 중요하고도 단순한 과정입니다.**_
 `recog_wav.sh`를 이용해 단일입력을 decoding 합니다.
 
 제가 생성한 모델은 lang model 을 사용하지 않으므로 `recog_wav.sh` 에서 LM 옵션을 모두 제거하였습니다.
+
+ESPnet에서 제공하는 사전 학습된 모델을 사용하지 않고, 사용자가 생성한 모델을 사용하여 decoding 하기 위해서는 코드 수정이 필요합니다.
+
+* 사전 학습된 모델을 사용하는 코드부분은 삭제하였으며 LM 옵션 제거와 텍스트 후처리 부분을 일부 추가하였습니다.
+* [recog_wav2.sh](https://github.com/plhyun/KoreanASR-ESPnet/blob/main/recog_wav2.sh) 를 확인하시길 바랍니다.
+
+### 4) Decoding 진행
+
+터미널에서 `recog_wav.sh`를 다음과 같은 옵션으로 실행하여 decoding을 진행합니다.
+
+```
+# 어디서든 실행가능 하지만 아래 경우를 예시로 합니다.
+$ cd <espnet 경로>/espnet/egs/librispeech/asr1
+
+# 실행 옵션
+# $ bash ../../../utils/<recog_wav.sh-name> --cmvn <cmvn.ark-root>/cmvn.ark --recog_model <model.acc.best-root>/model.acc.best --decode_config <decode.yaml-root>/decode.yaml wavefile
+
+# ex)
+$ bash ../../../utils/recog_wav2.sh --cmvn /root/espnet/egs/librispeech/asr1/data/train/cmvn.ark --recog_model /root/espnet/egs/librispeech/asr1/exp/train_pytorch_korean/results/model.acc.best --decode_config /root/espnet/egs/librispeech/asr1/conf/decode.yaml /root/wav/quiz3.wav
+```
