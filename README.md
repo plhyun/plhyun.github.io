@@ -45,13 +45,13 @@ $ source ~/.bashrc
 
 ### 2) Install Kaldi
 
-1. Git에서 Kaldi를 가져옵니다.
+#### 1. Git에서 Kaldi를 가져옵니다.
 ```
 $ cd <설치할 경로>
 $ git clone https://github.com/kaldi-asr/kaldi
 ```
 
-2. tool 설치
+#### 2. tool 설치
 ```
 $ cd <kaldi-root>/kaldi/tools
 $ ./extras/check_dependencies.sh
@@ -61,10 +61,28 @@ $ ./extras/check_dependencies.sh
 
 ```
 $ cd <kaldi-root>/kaldi/tools
-$ make -j 4
+$ make
+
+# make 에 사용되는 CPU 개수를 설정해주어 더욱 빠르게 설치할 수 있습니다.
+# $ make -j <NUM-CPU>
 ```
-* #### BLAS 라이브러리는 Intel의 MKL을 사용합니다. (Intel CPU 사용 시)
+* **BLAS 라이브러리는 Intel의 MKL을 사용합니다. (Intel CPU 사용 시)**
   * AMD CPU 사용 시 OpenBLAS 사용을 권장합니다.
   * 위의 필요한 패키지 목록 안내에 따라 `$ Run extras/install_mkl.sh`로 설치할 수 있습니다.
-  
+
+#### 3. Compile & Install
+```
+$ cd ../src
+
+# 기본값인 mkl을 사용하므로 별다른 옵션 없이 configure 합니다.
+# OpenBLAS 사용 시 별도의 옵션이 필요합니다.
+$ sudo ./configure --shared
+```
+* 보통 이 과정에서 에러가 많이 발생합니다. (대다수는 openfst, mkl or OpenBLAS 등의 설치 오류입니다.)
+* 관련 아티클들을 잘 찾아보고 디버깅하여 다시 `$ make` 해주어야 합니다.
+* configure 결과가 모두 success인 것을 꼭 확인하시길 바랍니다.
+
+```
+$ make -j clean depend; make -j <NUM-CPU>
+```
 ***
