@@ -8,6 +8,7 @@ Linux 운영체제에서 학습된 `ESPnet` ASR 모델을 Windows에서 실행�
 우선 `ESPnet`은 기본적으로 Windows를 지원하지 않습니다.
 `Kaldi`, `Cuda` 등 여러 툴킷들을 사용하기에 많은 제약이 있기 때문에 손쉽게 Windows에서 Linux 시스템을 이용할 수 있는 WSL을 사용하였습니다.
 
+본 글은 WSL2를 사용하므로 WSL2설치 후 개발환경 구축과 ESPnet 설치 및 실행 과정은 Linux에서와 거의 동일합니다. 
 ***
 
 
@@ -64,6 +65,7 @@ $ cd <kaldi-root>/kaldi/tools
 $ make
 
 # make 에 사용되는 CPU 개수를 설정해주어 더욱 빠르게 설치할 수 있습니다.
+# 사용자 컴퓨터 하드웨어에 따라 다르지만, 대체로 4로 설정합니다.(낮은 사양에서는 사용 시 make 도중 멈춤이 발생합니다.)
 # $ make -j <NUM-CPU>
 ```
 * **BLAS 라이브러리는 Intel의 MKL을 사용합니다. (Intel CPU 사용 시)**
@@ -83,6 +85,37 @@ $ sudo ./configure --shared
 * configure 결과가 모두 success인 것을 꼭 확인하시길 바랍니다.
 
 ```
+# 시간이 오래 걸리니 <NUM-CPU>를 설정하시는 것을 권장드립니다.
 $ make -j clean depend; make -j <NUM-CPU>
+```
+***
+
+## 3. Install ESPnet
+개발환경이 모두 구축되면, `ESPnet`을 설치합니다.
+
+#### 1) Git에서 ESPnet을 가져옵니다.
+```
+# kaldi 설치 경로와 동일하게 설정하는 것을 권장드립니다.
+$ cd <설치할 경로>
+$ git clone https://github.com/espnet/espnet
+```
+
+#### 2) ESPnet에서 kaldi 사용
+```
+# espnet의 tools폴더에 kaldi를 연결합니다.
+$ cd <espnet 경로>/tools
+$ ln -s <kaldi 경로> .
+```
+
+#### 3) Python 환경을 구축합니다.
+```
+$ cd <espnet 경로>/tools
+$ ./setup_anaconda.sh anaconda espnet 3.8
+```
+
+#### 4) ESPnet을 설치합니다.
+```
+$ cd <espnet 경로>/tools
+$ make
 ```
 ***
