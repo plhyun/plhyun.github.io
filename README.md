@@ -1,4 +1,4 @@
-# Pre-trained ESPnet model execute for Windows
+# Executing Pre-trained ESPnet model for Windows
 
 Linux 운영체제에서 미리 학습된 `ESPnet` ASR 모델을 Windows에서 실행하는 과정입니다.
 
