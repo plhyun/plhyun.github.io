@@ -60,6 +60,10 @@ $ ./extras/check_dependencies.sh
 * `$ ./extras/check_dependencies.sh` 이 구문을 실행하고 나면 필요한 패키지 목록들을 가르쳐 주는데, 안내에 따라 모두 설치합니다.
 * `$ apt install <패키지이름>` 으로 설치할 수 있습니다.
 
+* **BLAS 라이브러리는 Intel의 MKL을 사용합니다. (Intel CPU 사용 시)**
+  * AMD CPU 사용 시 OpenBLAS 사용을 권장합니다.
+  * 위의 필요한 패키지 목록 안내에 따라 `$ ./extras/install_mkl.sh`로 설치할 수 있습니다.
+
 ```
 $ cd <kaldi-root>/kaldi/tools
 $ make
@@ -68,9 +72,7 @@ $ make
 # 사용자 컴퓨터 하드웨어에 따라 다르지만, 대체로 4로 설정합니다.(낮은 사양에서는 사용 시 make 도중 멈춤이 발생합니다.)
 # $ make -j <NUM-CPU>
 ```
-* **BLAS 라이브러리는 Intel의 MKL을 사용합니다. (Intel CPU 사용 시)**
-  * AMD CPU 사용 시 OpenBLAS 사용을 권장합니다.
-  * 위의 필요한 패키지 목록 안내에 따라 `$ Run extras/install_mkl.sh`로 설치할 수 있습니다.
+
 
 #### 3. Compile & Install
 ```
