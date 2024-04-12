@@ -115,6 +115,12 @@ $ cd <espnet 경로>/tools
 $ ./setup_anaconda.sh anaconda espnet 3.8
 ```
 
+##### * 3)에서 권한 에러가 발생 시 아래 명령어를 활용하여 권한 허용을 해주면 됩니다.
+```
+# sudo chown -R <user name> /home/<user name>/<파일경로>
+$ sudo chown -R park /home/park/.cache
+```
+
 #### 4) ESPnet을 설치합니다.
 ```
 $ cd <espnet 경로>/tools
